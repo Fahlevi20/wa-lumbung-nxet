@@ -3,8 +3,23 @@ import styled from "styled-components";
 import ChatIcon from '@mui/icons-material/Chat';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import SearchIcon from '@mui/icons-material/Search';
+import * as EmailValidator from "email-validator";
+
 
 function Sidebar() {
+
+const createChat = () => {
+    const input = prompt("tolong masukkan alamat email untuk user yang kamu ingin chat dengannya"
+    );
+
+    if (!input) return null;
+
+    if (EmailValidator.validate(input)){
+        
+    }
+
+
+}
     return (
     <Container>
         <Header>
@@ -26,7 +41,7 @@ function Sidebar() {
             <SearchIcon />
             <SearchInput placeholder="Temukan kontak anda" />
         </Search>
-        <SidebarButton>Mulai chat baru yuk</SidebarButton>    
+        <SidebarButton on={createChat}>Mulai chat baru yuk</SidebarButton>    
     </Container>
     );
 }
