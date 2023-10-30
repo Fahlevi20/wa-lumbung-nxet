@@ -1,5 +1,6 @@
 import firebase from 'firebase/app'; // Import the 'app' module explicitly
-import 'firebase/auth';
+require('@firebase/auth');
+require('@firebase/firestore');
 import 'firebase/firestore';
 import { initializeApp, getApps } from "firebase/app"
 import { getFirestore } from "firebase/firestore"
@@ -22,8 +23,10 @@ const firebaseConfig = {
   : firebase.app(); 
 
 
-  const db = getFirestore(app);
-  const auth = getAuth(app);
+  const db = getFirestore();
+  const auth = getAuth();
+  
   const provider = new GoogleAuthProvider();
 
   export {db, auth, provider};
+
