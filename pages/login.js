@@ -7,8 +7,18 @@ import styled from "styled-components"
 
 function Login() {
     const signIn = () => {
-        signInWithPopup(auth, provider).catch(alert)
-    }
+        signInWithPopup(auth, provider)
+          .then((result) => {
+            // Handle successful sign-in if needed
+            console.log("Sign-in successful:", result.user);
+            // Redirect to a different page or take further action if necessary
+          })
+          .catch((error) => {
+            // Handle errors or display them to the user
+            alert("Sign-in failed. Please try again.");
+            console.error("Sign-in error:", error);
+          });
+      };
     return (
         <Container>
             <Head>

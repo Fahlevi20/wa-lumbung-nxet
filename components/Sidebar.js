@@ -4,9 +4,21 @@ import ChatIcon from '@mui/icons-material/Chat';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import SearchIcon from '@mui/icons-material/Search';
 import * as EmailValidator from "email-validator";
+import {getAuth, signOut } from "firebase/auth";
 
+const auth=getAuth();
 
 function Sidebar() {
+
+    const handleSignOut = async()=> {
+    try{
+        await signOut(auth);
+
+        console.log('user sign out');
+    } catch (error){
+        console.error('error saat sign out',error);
+    }
+};
 
 const createChat = () => {
     const input = prompt("tolong masukkan alamat email untuk user yang kamu ingin chat dengannya"
@@ -19,11 +31,11 @@ const createChat = () => {
     }
 
 
-}
+};
     return (
     <Container>
         <Header>
-            <UserAvatar />
+            <UserAvatar onClick={handleSignOut} />
 
             <IconsContainer>
                 <IconButton>
@@ -59,7 +71,7 @@ const SidebarButton=styled(Button)`
 width:100%;
 
 &&&{
-border-top: 1px solid whitesmoke
+border-top: 1px solid whitesmoke;
 border-bottom: 1px solid whitesmoke}`;
 const SearchInput = styled.input`
 outline-width:0;
