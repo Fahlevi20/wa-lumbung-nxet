@@ -5,10 +5,14 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import SearchIcon from '@mui/icons-material/Search';
 import * as EmailValidator from "email-validator";
 import {getAuth, signOut } from "firebase/auth";
+import { collection, addDoc } from "firebase/firestore";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { db } from "@/firebase";
 
 const auth=getAuth();
 
 function Sidebar() {
+    const [user] = useAuthState(auth);
 
     const handleSignOut = async()=> {
     try{
@@ -26,11 +30,13 @@ const createChat = () => {
 
     if (!input) return null;
 
-    if (EmailValidator.validate(input)){
-        
-    }
+    if (EmailValidator.validate(input)) {
+    
+    addDoc(collection( db,'chats'), {
+        user: [user.email, input],
+    });
 
-
+}
 };
     return (
     <Container>
@@ -53,7 +59,7 @@ const createChat = () => {
             <SearchIcon />
             <SearchInput placeholder="Temukan kontak anda" />
         </Search>
-        <SidebarButton on={createChat}>Mulai chat baru yuk</SidebarButton>    
+        <SidebarButton onClick={createChat}>Mulai chat baru yuk</SidebarButton>    
     </Container>
     );
 }
